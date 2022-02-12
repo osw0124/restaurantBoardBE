@@ -2,10 +2,9 @@ const mongoose = require('mongoose');
 require('mongoose-type-url');
 
 const boardSchema = mongoose.Schema({
-    // image_url: {
-    //     work: mongoose.SchemaTypes.Image_url,
-    //     profile: mongoose.SchemaTypes.Image_url
-    // },
+    image_url: {
+        type: String
+    },
     title: {
         type: String,
         required: true,
@@ -25,7 +24,7 @@ const boardSchema = mongoose.Schema({
     },
     user_nick: {
         type: String,
-        // required: true
+        required: true
     }
 });
 
