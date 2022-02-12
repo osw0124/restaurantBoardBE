@@ -14,10 +14,10 @@ const requestMiddlware = (req, res, next) => {
 
 connect();
 
-app.use(express.json());
 app.use(requestMiddlware);
 app.use('/api', [boardRouter, auth_router]);
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 // app.use(express.static(""));
 
 
@@ -25,5 +25,5 @@ app.use('/node_modules', express.static(path.join('/node_modules')));
 
 
 app.listen(port, () => {
-    console.log(port, "포트로 서버가 열렸어요!");
+    console.log(`http://localhost:${port}에 접속되었습니다.`)
 });
