@@ -1,14 +1,26 @@
 const express = require("express");
 const connect = require("./schemas/index");
 const auth_router = require("./routes/auth");
-const jwt = require("jsonwebtoken");
+
 const app = express();
 const port = 3000;
 
 
+const requestMiddlware = (req, res, next) => {
+    console.log('Request URL:', req.originalUrl, '-', new Date());
+    next();
+};
+
+
+connect();
+
 app.use(express.json());
-app.use("/register", express.urlencoded({extended:false}), auth_router);
+app.use(requestMiddlware);
+app.use('/api', [auth_router]);
 // app.use(express.static(""));
+
+
+
 
 
 app.listen(port, () => {
