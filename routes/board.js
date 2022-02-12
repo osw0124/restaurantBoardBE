@@ -1,18 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const Boards = require('../schemas/boardSchema');
-const authMiddleware = require('../middleware/auth-middleware');
+//const authMiddleware = require('../middleware/auth-middleware');
 const jwt = require('jsonwebtoken');
 
 router.use(express.json());
 router.use(express.urlencoded({extended: true}));
 
-// 쓴 글 데이터를 DB에 저장
-router.get('/addpost/save', async(req, res) => {
-    const { user } = res.locals;
-    const { image_url, title, location, comment, score, createdDate } = req.body;
+// 메인 페이지에 페이지 목록 불러오기
+router.get('/main', async(req, res) => {
+    const createdData = await Boards.find().exec();
+    res.json({ response: createdData });
+});
 
-    await Boards.create({ user_nick: user['user_nick'], image_url, title, location, comment, score, createdDate });
+// 쓴 글 데이터를 DB에 저장
+router.post('/addpost/save', async(req, res) => {
+    const { user } = res.locals;
+    const { title, location, comment, score, createdDate } = req.body;
+
+    // merge후에 user_nick, image_url을 채워넣어야 합니다.
+    await Boards.create({ title, location, comment, score, createdDate });
     res.json({ success: '맛집 정보가 저장되었습니다!' })
 });
 
@@ -30,7 +37,7 @@ router.patch('/getpost/modify/:postid', async(req, res) => {
 });
 
 // 게시글 삭제
-router.delete('getpost/delete/:postid', async (req, res) => {
+router.delete('/getpost/delete/:postid', async (req, res) => {
     const { id } = req.params;
     await Boards.deleteOne({ _id: id });
     res.json({ success: '삭제 성공'});
