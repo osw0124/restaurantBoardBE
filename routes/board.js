@@ -18,8 +18,6 @@ router.post('/addpost/save', authMiddleware, async(req, res) => {
     const { user } = res.locals;
     const { title, location, comment, score, createdDate } = req.body;
     const shorturl = shortUrl.short(req.body.image_url);
-
-    console.log(req.body);
     
     // merge후에 user_nick, image_url을 채워넣어야 합니다.
     await Boards.create({ image_url: shorturl, user_nick: user.user_nick, title, location, comment, createdDate });
@@ -42,7 +40,6 @@ router.patch('/getpost/modify/:postid', async(req, res) => {
 // 게시글 삭제
 router.delete('/getpost/delete/:postid', async (req, res) => {
     const { postid } = req.params;
-    console.log(postid);
     await Boards.deleteOne({ _id: postid });
     res.json({ success: '삭제 성공'});
 });
