@@ -15,10 +15,10 @@ router.get('/main', async(req, res) => {
 });
 
 // 쓴 글 데이터를 DB에 저장
-router.post('/addpost/save', async(req, res) => {
+router.post('/addpost/save', authMiddleware, async(req, res) => {
     const { user } = res.locals;
     console.log(user);
-    const { title, location, user_nick, comment, score, createdDate } = req.body;
+    const { title, location, comment, score, createdDate } = req.body;
     const shorturl = shortUrl.short(req.body.image_url);
 
     console.log(req.body);
