@@ -3,7 +3,9 @@ const router = express.Router();
 const Boards = require('../schemas/boardSchema');
 //const authMiddleware = require('../middleware/auth-middleware');
 const jwt = require('jsonwebtoken');
+const cors = require("cors");
 
+router.use(cors());
 router.use(express.json());
 router.use(express.urlencoded({extended: true}));
 

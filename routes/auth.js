@@ -4,7 +4,11 @@ const SHA256 = require("crypto-js/sha256");
 const users = require('../schemas/userSchema');
 const auth_middleware = require("../middlewares/auth-middleware");
 const router = express.Router();
+const cors = require("cors");
 
+router.use(cors());
+router.use(express.json());
+router.use(express.urlencoded({extended: true}));
 
 // 회원정보 입력, 저장
 router.post('/register/save', async (req, res) => {
