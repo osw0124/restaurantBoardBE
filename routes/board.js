@@ -3,8 +3,8 @@ const router = express.Router();
 const Boards = require('../schemas/boardSchema');
 const authMiddleware = require('../middlewares/auth-middleware');
 
-router.use(express.json());
-router.use(express.urlencoded({extended: true}));
+router.use(express.json({limit: '10mb'}));
+router.use(express.urlencoded({limit:'10mb', extended: true}));
 
 // 메인 페이지에 페이지 목록 불러오기
 router.get('/main', async(req, res) => {
