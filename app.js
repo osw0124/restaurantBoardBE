@@ -19,9 +19,13 @@ connect();
 app.use(cors());
 app.use(requestMiddlware);
 app.use('/api', [boardRouter, auth_router]);
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
-app.use(bodyParser.json({limit: 5000000}));
+app.use(express.json({
+    limit: "10mb"
+}));
+app.use(express.urlencoded({
+    limit: "10mb",
+    extended: true
+}));
 
 app.use('/node_modules', express.static(path.join('/node_modules')));
 
