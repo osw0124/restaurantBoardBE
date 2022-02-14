@@ -40,11 +40,10 @@ router.patch('/getpost/modify/:postid', async(req, res) => {
 });
 
 // 게시글 삭제
-router.post('/getpost/delete/:postid', async (req, res) => {
+router.delete('/getpost/delete/:postid', async (req, res) => {
     const { id } = req.params;
-    await Boards.deleteOne({ _id: id });
+    await Boards.findByIdAndDelete({ _id: id });
     res.json({ success: '삭제 성공'});
-    
 });
 
 // 다른 js파일에서 참조하기 위한 명령어
