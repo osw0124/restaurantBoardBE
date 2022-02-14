@@ -24,7 +24,9 @@ router.post('/register/save', async (req, res) => {
     const user = new users({user_id, user_nick, user_pwd});
     await user.save();
 
-    res.status(201).send('회원가입에 성공했습니다.');
+    res.status(201).send({
+        success: '회원가입에 성공했습니다.'
+    });
 });
 
 // 아이디, 닉네임 중복확인
@@ -41,7 +43,9 @@ router.get('/register/check', async (req, res) => {
         return;
     }
     
-    res.send('이메일과 닉네임이 사용가능합니다.');
+    res.send({
+        success: '이메일과 닉네임이 사용가능합니다.'
+    });
 });
 
 // 로그인
