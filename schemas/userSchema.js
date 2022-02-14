@@ -7,8 +7,7 @@ const userSchema = new mongoose.Schema({
         default: "",
     },
     user_pwd: {
-        type: String,
-        match: /^[A-Za-z0-9!@#*-_]{8,16}$/,
+        type: String,        
         default: "",
     },
     user_nick: {
