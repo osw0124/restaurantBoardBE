@@ -18,6 +18,7 @@ module.exports = (req, res, next) => {
         console.log(userId);
         users.findById(userId).exec().then((user) => {
             res.locals.user = user;
+            console.log(res.locals.user);
             next();
         });        
     } catch (error) {
