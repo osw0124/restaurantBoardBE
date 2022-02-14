@@ -10,7 +10,6 @@ router.use(express.urlencoded({extended: true}));
 // 메인 페이지에 페이지 목록 불러오기
 router.get('/main', async(req, res) => {
     const createdData = await Boards.find().exec();
-    console.log(req.headers);
     res.json({ response: createdData });
 });
 
