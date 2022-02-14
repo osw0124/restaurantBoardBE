@@ -2,6 +2,7 @@ const express = require('express');
 const connect = require('./schemas');
 const path = require('path');
 const app = express();
+const cors = require("cors");
 
 const port = 3000;
 const auth_router = require("./routes/auth");
@@ -14,6 +15,7 @@ const requestMiddlware = (req, res, next) => {
 
 connect();
 
+app.use(cors());
 app.use(requestMiddlware);
 app.use('/api', [boardRouter, auth_router]);
 app.use(express.urlencoded({extended: true}));

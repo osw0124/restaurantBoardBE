@@ -11,7 +11,7 @@ router.post('/register/save', async (req, res) => {
     let {user_id, user_nick, user_pwd, user_confirmpwd} = req.body;
     if (user_pwd !== user_confirmpwd) {
         res.status(400).send({
-            errorMessage: '패스워드가 패스워드 확인란과 동일하지 않습니다.',
+            fail: '패스워드가 패스워드 확인란과 동일하지 않습니다.',
         });
         return;
     }
@@ -34,7 +34,7 @@ router.get('/register/check', async (req, res) => {
     });
     if (existUsers.length) {
         res.status(400).send({
-            errorMessage: "이미 가입된 이메일 또는 닉네임이 있습니다."
+            fail: "이미 가입된 이메일 또는 닉네임이 있습니다."
         });
         return;
     }
@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
 
     if (!user) {
         res.status(401).send({
-            errorMessage: "이메일 또는 패스워드가 잘못됬습니다."
+            fail: "이메일 또는 패스워드가 잘못됬습니다."
         });
         return;
     }
@@ -61,6 +61,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({userId: user.userId}, 'login-secret-key');
     res.send({
         token,
+        success: '로그인 성공했습니다.'
     });
 });
 
