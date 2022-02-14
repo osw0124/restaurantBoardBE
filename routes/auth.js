@@ -53,7 +53,6 @@ router.post('/login', async (req, res) => {
     let {user_id, user_pwd} = req.body;
 
     user_pwd = SHA256(user_pwd).toString();
-    console.log(user_pwd);
 
     const user = await users.findOne({user_id, user_pwd}).exec();
 
@@ -64,7 +63,7 @@ router.post('/login', async (req, res) => {
         return;
     }
 
-    const token = jwt.sign({userId: user.userId, user_nick: user.user_nick}, 'login-secret-key');
+    const token = jwt.sign({userId: user._id, user_nick: user.user_nick}, 'login-secret-key');
     res.send({
         token,
         user_nick: user.user_nick,
