@@ -53,10 +53,8 @@ router.post('/login', async (req, res) => {
     let {user_id, user_pwd} = req.body;
 
     user_pwd = SHA256(user_pwd).toString();
-    console.log(user_pwd);
 
     const user = await users.findOne({user_id, user_pwd}).exec();
-    console.log(user);
 
     if (!user) {
         res.status(401).send({
