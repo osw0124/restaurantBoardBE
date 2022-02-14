@@ -50,7 +50,7 @@ router.get('/register/check', async (req, res) => {
 
 // 로그인
 router.post('/login', async (req, res) => {
-    const { user_id, user_pwd } = req.body;
+    let { user_id, user_pwd } = req.body;
 
     user_pwd = SHA256(user_pwd).toString();
 
