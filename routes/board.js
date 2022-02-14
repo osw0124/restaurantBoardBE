@@ -19,7 +19,8 @@ router.get('/main', async(req, res) => {
 router.post('/addpost/save', async(req, res) => {
     const { user } = res.locals;
     const { image_url, title, location, comment, score, createdDate } = req.body;
-
+    console.log(req.body);
+    
     // merge후에 user_nick, image_url을 채워넣어야 합니다.
     await Boards.create({ image_url, user_nick: user.user_nick, title, location, comment, score, createdDate });
     res.json({ success: '맛집 정보가 저장되었습니다!' })
