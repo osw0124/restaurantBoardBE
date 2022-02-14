@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Boards = require('../schemas/boardSchema');
 const authMiddleware = require('../middlewares/auth-middleware');
-const jwt = require('jsonwebtoken');
 const shortUrl = require('node-url-shortener');
 
 router.use(express.json());
@@ -11,6 +10,7 @@ router.use(express.urlencoded({extended: true}));
 // 메인 페이지에 페이지 목록 불러오기
 router.get('/main', async(req, res) => {
     const createdData = await Boards.find().exec();
+    console.log(req.headers);
     res.json({ response: createdData });
 });
 
