@@ -43,7 +43,7 @@ router.patch('/getpost/modify/:postid', async(req, res) => {
 router.delete('/getpost/delete/:postid', async (req, res) => {
     const { postid } = req.params;
     console.log(postid);
-    await Boards.deleteOne({ _id: id });
+    await Boards.deleteOne({ _id: postid });
     res.json({ success: '삭제 성공'});
 });
 
