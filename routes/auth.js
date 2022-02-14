@@ -56,6 +56,7 @@ router.post('/login', async (req, res) => {
 
     const user = await users.findOne({user_id, user_pwd}).exec();
     console.log(user);
+    console.log(user.user_nick);
     if (!user) {
         res.status(401).send({
             fail: "이메일 또는 패스워드가 잘못됬습니다."
