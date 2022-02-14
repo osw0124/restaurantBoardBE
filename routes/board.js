@@ -28,14 +28,14 @@ router.post('/addpost/save', authMiddleware, async(req, res) => {
 
 // 상세 페이지 조회
 router.get('/getpost/:postid', async(req, res) => {
-    const { id } = req.params;
-    const wroteData = await Boards.findById(id);
+    const { postid } = req.params;
+    const wroteData = await Boards.findById(postid);
     res.json({ response: wroteData });
 });
 
 // 페이지 내용 수정
 router.patch('/getpost/modify/:postid', async(req, res) => {
-    await Boards.findByIdAndUpdate(req.params.id, { response: req.body })
+    await Boards.findByIdAndUpdate(req.params.postid, { response: req.body })
     res.json({ success: '수정 성공!'})
 });
 
