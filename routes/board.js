@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Boards = require('../schemas/boardSchema');
-const authMiddleware = require('../middleware/auth-middleware');
+const authMiddleware = require('../middlewares/auth-middleware');
 const jwt = require('jsonwebtoken');
 const shortUrl = require('node-url-shortener');
 
