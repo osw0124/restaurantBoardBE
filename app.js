@@ -20,8 +20,6 @@ app.use(requestMiddlware);
 app.use('/api', [boardRouter, auth_router]);
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-// app.use(express.static(""));
-
 
 app.use('/node_modules', express.static(path.join('/node_modules')));
 
