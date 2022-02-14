@@ -2,6 +2,7 @@ const express = require('express');
 const connect = require('./schemas');
 const path = require('path');
 const app = express();
+const bodyParser = require('body-parser');
 const cors = require("cors");
 
 const port = 4000;
@@ -20,6 +21,7 @@ app.use(requestMiddlware);
 app.use('/api', [boardRouter, auth_router]);
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(bodyParser.json({limit: 5000000}));
 
 app.use('/node_modules', express.static(path.join('/node_modules')));
 

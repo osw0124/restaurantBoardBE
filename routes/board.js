@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Boards = require('../schemas/boardSchema');
-const bodyParser = require('body-parser');
 const authMiddleware = require('../middlewares/auth-middleware');
 
 router.use(express.json());
 router.use(express.urlencoded({extended: true}));
-router.use(bodyParser.json({limit: 5000000}));
 
 // 메인 페이지에 페이지 목록 불러오기
 router.get('/main', async(req, res) => {
