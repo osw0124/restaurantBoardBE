@@ -3,6 +3,7 @@ const router = express.Router();
 const Boards = require('../schemas/boardSchema');
 //const authMiddleware = require('../middleware/auth-middleware');
 const jwt = require('jsonwebtoken');
+const shortUrl = require("node-url-shortener");
 
 router.use(express.json());
 router.use(express.urlencoded({extended: true}));
@@ -16,11 +17,13 @@ router.get('/main', async(req, res) => {
 // 쓴 글 데이터를 DB에 저장
 router.post('/addpost/save', async(req, res) => {
     const { user } = res.locals;
-    const { image_url, title, location, comment, score, createdDate } = req.body;
+    const { title, location, comment, score, createdDate } = req.body;
+    const shorturl = shortUrl.short(req.body.image_url);
+
     console.log(req.body);
     
     // merge후에 user_nick, image_url을 채워넣어야 합니다.
-    await Boards.create({ image_url, title, location, comment, createdDate });
+    await Boards.create({ image_url: shorturl, user_nick: user.user_nick, title, location, comment, createdDate });
     res.json({ success: '맛집 정보가 저장되었습니다!' })
 });
 

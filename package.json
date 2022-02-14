@@ -6,7 +6,8 @@
     "hashlib": "^1.0.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.1",
-    "mongoose-type-url": "^2.1.0"
+    "mongoose-type-url": "^2.1.0",
+    "node-url-shortener": "^2.0.1"
   },
   "devDependencies": {
     "jest": "^27.5.1",
