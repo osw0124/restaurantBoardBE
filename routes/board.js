@@ -16,14 +16,13 @@ router.get('/main', async(req, res) => {
 // 쓴 글 데이터를 DB에 저장
 router.post('/addpost/save', authMiddleware, async(req, res) => {
     const { user } = res.locals;
-    //console.log(user.user_nick);
     const { title, location, comment, score, createdDate } = req.body;
     const shorturl = shortUrl.short(req.body.image_url);
 
     console.log(req.body);
     
     // merge후에 user_nick, image_url을 채워넣어야 합니다.
-    await Boards.create({ image_url: shorturl, user_nick: user.user_nick, title, location, comment, createdDate });
+    await Boards.create({ image_url: shorturl, user_nick: user['user_nick'], title, location, comment, createdDate });
     res.json({ success: '맛집 정보가 저장되었습니다!' })
 });
 
