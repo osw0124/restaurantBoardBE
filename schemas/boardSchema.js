@@ -23,8 +23,7 @@ const boardSchema = mongoose.Schema({
         default: Date.now
     },
     user_nick: {
-        type: String,
-        required: true
+        type: String
     }
 });
 
