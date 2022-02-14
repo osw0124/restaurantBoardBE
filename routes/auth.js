@@ -56,6 +56,7 @@ router.post('/login', async (req, res) => {
     console.log(user_pwd);
 
     const user = await users.findOne({user_id, user_pwd}).exec();
+    console.log(user);
 
     if (!user) {
         res.status(401).send({
