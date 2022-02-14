@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
     user_pwd = SHA256(user_pwd).toString();
 
     const user = await users.findOne({user_id, user_pwd}).exec();
-    console.log(user);
+    console.log(user._id);
     console.log(user.user_nick);
     if (!user) {
         res.status(401).send({
@@ -64,7 +64,7 @@ router.post('/login', async (req, res) => {
         return;
     }
 
-    const token = jwt.sign({user_id: user.user_id, user_nick: user.user_nick}, 'login-secret-key');
+    const token = jwt.sign({userId: user._id, user_nick: user.user_nick}, 'login-secret-key');
     res.send({
         token,
         user_nick: user.user_nick,
