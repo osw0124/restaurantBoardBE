@@ -38,7 +38,7 @@ router.post('/register/check', async (req, res) => {
         $or: [{user_id}, {user_nick}],
     });
     if (existUsers.length) {
-        res.status(400).send({
+        res.send({
             alert: "이미 가입된 이메일 또는 닉네임이 있습니다."
         });
         return;
