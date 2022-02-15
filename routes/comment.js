@@ -7,7 +7,7 @@ const auth_middleware = require("../middlewares/auth-middleware");
 router.get('/comment/save', auth_middleware, async (req, res) => {
     const { user } = res.locals;
     console.log(user);
-    const {user_comment} = req.body;
+    const {user_comment, createDate} = req.body;
 
     await Comment.create({user_nick: user.user_nick, user_comment , createDate});
     res.json({
