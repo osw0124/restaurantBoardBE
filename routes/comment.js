@@ -15,6 +15,19 @@ router.post('/comment/save', auth_middleware, async (req, res) => {
     });
 });
 
+router.get('/comment/:commentid', async (req, res) => {
+    const { commentid } = req.params;
+    
+});
+
+
+
+// 상세 페이지 조회
+router.get('/getpost/:postid', async(req, res) => {
+    const { postid } = req.params;
+    const wroteData = await Boards.findById(postid);
+    res.json({ response: wroteData });
+});
 
 
 module.exports = router;
