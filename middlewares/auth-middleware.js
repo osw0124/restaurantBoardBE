@@ -4,7 +4,7 @@ const jwtSecret = process.env.SECRET_KEY;
 
 module.exports = (req, res, next) => {
     const {authorization} = req.headers;
-    // console.log(authorization);
+    console.log(authorization);
     const [tokenType, tokenValue] = authorization.split(' ');
     
 
