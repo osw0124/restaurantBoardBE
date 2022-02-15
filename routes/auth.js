@@ -50,12 +50,11 @@ router.get('/register/check', async (req, res) => {
 
 // 로그인
 router.post('/login', async (req, res) => {
-    let {user_id, user_pwd} = req.body;
+    let { user_id, user_pwd } = req.body;
 
     user_pwd = SHA256(user_pwd).toString();
 
     const user = await users.findOne({user_id, user_pwd}).exec();
-
     if (!user) {
         res.status(401).send({
             fail: "이메일 또는 패스워드가 잘못됬습니다."
