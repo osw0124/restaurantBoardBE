@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const commentSchema = mongoose.Schema({
-    name: {
+    user_nick: {
         type: String
     },
-    contents: {
+    user_comment: {
         type: String,
         required: true
     },

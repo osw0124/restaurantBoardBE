@@ -72,15 +72,4 @@ router.post('/login', async (req, res) => {
     });
 });
 
-router.get('/check_auth', auth_middleware, async (req, res) => {
-    const {user} = res.locals;
-    res.send({
-        user: {
-            user_id: user.user_id,
-            user_nick: user.user_nick,
-        },
-    });
-});
-
-
 module.exports = router;

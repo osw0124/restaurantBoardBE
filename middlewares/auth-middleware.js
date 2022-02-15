@@ -20,6 +20,7 @@ module.exports = (req, res, next) => {
         const {userId} = jwt.verify(tokenValue, jwtSecret);
         users.findById(userId).exec().then((user) => {
             res.locals.user = user;
+            console.log(res.locals.user);
             next();
         });
     } catch (error) {
