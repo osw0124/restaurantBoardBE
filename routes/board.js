@@ -31,7 +31,8 @@ router.get('/getpost/:postid', async(req, res) => {
 
 // 페이지 내용 수정
 router.patch('/getpost/modify/:postid', async(req, res) => {
-    await Boards.findByIdAndUpdate(req.params.postid, { response: req.body })
+    const { title, location, comment } = req.body;
+    await Boards.findByIdAndUpdate(req.params.postid, { title, location, comment })
     res.json({ success: '수정 성공!'})
 });
 
