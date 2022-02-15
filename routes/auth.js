@@ -38,14 +38,14 @@ router.post('/register/check', async (req, res) => {
         $or: [{user_id}, {user_nick}],
     });
     if (existUsers.length) {
-        res.send({
-            fail: "이미 가입된 이메일 또는 닉네임이 있습니다."
+        res.status(400).send({
+            alert: "이미 가입된 이메일 또는 닉네임이 있습니다."
         });
         return;
     }
     
     res.send({
-        success: '이메일과 닉네임이 사용가능합니다.'
+        alert: '이메일과 닉네임이 사용가능합니다.'
     });
 });
 
