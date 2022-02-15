@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const SHA256 = require("crypto-js/sha256");
 const users = require('../schemas/userSchema');
 const auth_middleware = require("../middlewares/auth-middleware");
+const jwtSecret = process.env.SECRET_KEY;
 const router = express.Router();
 
 router.use(express.json());
@@ -30,22 +31,22 @@ router.post('/register/save', async (req, res) => {
 });
 
 // 아이디, 닉네임 중복확인
-router.get('/register/check', async (req, res) => {
+router.post('/register/check', async (req, res) => {
     const {user_id, user_nick} = req.body;
-    console.log(req.body);
+    console.log(user_id, user_nick);
 
     const existUsers = await users.find({
         $or: [{user_id}, {user_nick}],
     });
     if (existUsers.length) {
-        res.status(400).send({
-            fail: "이미 가입된 이메일 또는 닉네임이 있습니다."
+        res.send({
+            alert: "이미 가입된 이메일 또는 닉네임이 있습니다."
         });
         return;
     }
     
     res.send({
-        success: '이메일과 닉네임이 사용가능합니다.'
+        alert: '이메일과 닉네임이 사용가능합니다.'
     });
 });
 
@@ -63,23 +64,12 @@ router.post('/login', async (req, res) => {
         return;
     }
 
-    const token = jwt.sign({userId: user._id, user_nick: user.user_nick}, 'login-secret-key');
+    const token = jwt.sign({userId: user._id, user_nick: user.user_nick}, jwtSecret);
     res.send({
         token,
         user_nick: user.user_nick,
         success: '로그인 성공했습니다.'
     });
 });
-
-router.get('/check_auth', auth_middleware, async (req, res) => {
-    const {user} = res.locals;
-    res.send({
-        user: {
-            user_id: user.user_id,
-            user_nick: user.user_nick,
-        },
-    });
-});
-
 
 module.exports = router;
