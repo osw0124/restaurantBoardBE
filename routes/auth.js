@@ -30,22 +30,22 @@ router.post('/register/save', async (req, res) => {
 });
 
 // 아이디, 닉네임 중복확인
-router.get('/register/check', async (req, res) => {
+router.post('/register/check', async (req, res) => {
     const {user_id, user_nick} = req.body;
-    console.log(req.body);
+    console.log(user_id, user_nick);
 
     const existUsers = await users.find({
         $or: [{user_id}, {user_nick}],
     });
     if (existUsers.length) {
-        res.status(400).send({
-            fail: "이미 가입된 이메일 또는 닉네임이 있습니다."
+        res.send({
+            alert: "이미 가입된 이메일 또는 닉네임이 있습니다."
         });
         return;
     }
     
     res.send({
-        success: '이메일과 닉네임이 사용가능합니다.'
+        alert: '이메일과 닉네임이 사용가능합니다.'
     });
 });
 
