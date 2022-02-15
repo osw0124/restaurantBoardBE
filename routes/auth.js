@@ -5,6 +5,8 @@ const users = require('../schemas/userSchema');
 const auth_middleware = require("../middlewares/auth-middleware");
 const router = express.Router();
 
+router.use(express.json());
+router.use(express.urlencoded({extended: true}));
 
 // 회원정보 입력, 저장
 router.post('/register/save', async (req, res) => {
@@ -22,12 +24,15 @@ router.post('/register/save', async (req, res) => {
     const user = new users({user_id, user_nick, user_pwd});
     await user.save();
 
-    res.status(201).send('회원가입에 성공했습니다.');
+    res.status(201).send({
+        success: '회원가입에 성공했습니다.'
+    });
 });
 
 // 아이디, 닉네임 중복확인
 router.get('/register/check', async (req, res) => {
     const {user_id, user_nick} = req.body;
+    console.log(req.body);
 
     const existUsers = await users.find({
         $or: [{user_id}, {user_nick}],
@@ -39,18 +44,18 @@ router.get('/register/check', async (req, res) => {
         return;
     }
     
-    res.send('이메일과 닉네임이 사용가능합니다.');
+    res.send({
+        success: '이메일과 닉네임이 사용가능합니다.'
+    });
 });
 
 // 로그인
 router.post('/login', async (req, res) => {
-    let {user_id, user_pwd} = req.body;
+    let { user_id, user_pwd } = req.body;
 
     user_pwd = SHA256(user_pwd).toString();
-    console.log(user_pwd);
 
     const user = await users.findOne({user_id, user_pwd}).exec();
-
     if (!user) {
         res.status(401).send({
             fail: "이메일 또는 패스워드가 잘못됬습니다."
@@ -58,9 +63,10 @@ router.post('/login', async (req, res) => {
         return;
     }
 
-    const token = jwt.sign({userId: user.userId}, 'login-secret-key');
+    const token = jwt.sign({userId: user._id, user_nick: user.user_nick}, 'login-secret-key');
     res.send({
         token,
+        user_nick: user.user_nick,
         success: '로그인 성공했습니다.'
     });
 });

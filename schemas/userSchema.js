@@ -7,13 +7,12 @@ const userSchema = new mongoose.Schema({
         default: "",
     },
     user_pwd: {
-        type: String,
-        match: /[A-Za-z0-9!@#*-_]{8,16}/,
+        type: String,        
         default: "",
     },
     user_nick: {
         type: String,
-        match: /[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{2,10}/,
+        match: /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{2,10}$/,
         default: "",
     }
 });

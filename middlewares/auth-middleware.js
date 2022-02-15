@@ -4,8 +4,8 @@ const users = require('../schemas/userSchema');
 module.exports = (req, res, next) => {
     const {authorization} = req.headers;
     const [tokenType, tokenValue] = authorization.split(' ');
-    // console.log(tokenValue);
 
+    console.log(tokenValue);
     if (tokenType !== 'Bearer') {
         res.status(401).send({
             errorMessage: '로그인 후 사용하세요',
@@ -15,7 +15,6 @@ module.exports = (req, res, next) => {
 
     try {
         const {userId} = jwt.verify(tokenValue, "login-secret-key");
-
         users.findById(userId).exec().then((user) => {
             res.locals.user = user;
             next();
@@ -26,6 +25,4 @@ module.exports = (req, res, next) => {
         });
         return;
     }
-
-    next();
 };
