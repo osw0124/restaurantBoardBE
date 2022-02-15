@@ -30,9 +30,9 @@ router.post('/register/save', async (req, res) => {
 });
 
 // 아이디, 닉네임 중복확인
-router.get('/register/check', async (req, res) => {
+router.post('/register/check', async (req, res) => {
     const {user_id, user_nick} = req.body;
-    console.log(req.body);
+    console.log(user_id, user_nick);
 
     const existUsers = await users.find({
         $or: [{user_id}, {user_nick}],
