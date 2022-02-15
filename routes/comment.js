@@ -9,7 +9,7 @@ router.get('/comment/save', auth_middleware, async (req, res) => {
     console.log(user);
     const {user_comment} = req.body;
 
-    await Comment.create({user_nick: user.user_nick, user_comment ,createdData});
+    await Comment.create({user_nick: user.user_nick, user_comment , createDate});
     res.json({
         success: '댓글이 저장 되었습니다.'
     });
