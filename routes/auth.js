@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const SHA256 = require("crypto-js/sha256");
 const users = require('../schemas/userSchema');
 const auth_middleware = require("../middlewares/auth-middleware");
+const SECRET_KEY =  require("../env");
 const router = express.Router();
 
 router.use(express.json());
@@ -63,7 +64,7 @@ router.post('/login', async (req, res) => {
         return;
     }
 
-    const token = jwt.sign({userId: user._id, user_nick: user.user_nick}, 'login-secret-key');
+    const token = jwt.sign({userId: user._id, user_nick: user.user_nick}, SECRET_KEY);
     res.send({
         token,
         user_nick: user.user_nick,

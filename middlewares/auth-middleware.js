@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const users = require('../schemas/userSchema');
+const SECRET_KEY = require("../env");
 
 module.exports = (req, res, next) => {
     const {authorization} = req.headers;
@@ -16,7 +17,7 @@ module.exports = (req, res, next) => {
     }
 
     try {
-        const {userId} = jwt.verify(tokenValue, "login-secret-key");
+        const {userId} = jwt.verify(tokenValue, SECRET_KEY);
         users.findById(userId).exec().then((user) => {
             res.locals.user = user;
             next();
