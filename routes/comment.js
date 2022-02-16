@@ -20,9 +20,9 @@ router.post('/comment/save/:id', auth_middleware, async (req, res) => {
 
 //댓글 조회
 router.get('/comment/get/:id', async (req, res) => {    
-    const { commentid } = req.params;
+    const { postid } = req.params;
 
-    const comment_list = Comment.find(commentid).populate(articleId).exec();
+    const comment_list = Comment.findById(postid).populate(articleId).exec();
     console.log(comment_list);
 
     if (comment_list.length) {
