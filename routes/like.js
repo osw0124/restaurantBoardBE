@@ -9,9 +9,9 @@ router.use(express.urlencoded({ extended: true }));
 // 게시글 좋아요
 router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
-    let likecount = 0;
+    const likeData = await Like.find({post_id: req.params.postid}).exec();
     console.log("likecount : ", typeof(likecount));
-    const variable = { post_id: req.params.postid, user_nick: user.user_nick, like_count: likecount++ };
+    const variable = { post_id: req.params.postid, user_nick: user.user_nick, like_count: ++likeData.like_count };
     console.log("data : ", variable);
 
     await Like.create(variable);
@@ -21,8 +21,9 @@ router.post('/like/:postid', authMiddleware, async(req, res) => {
 // 게시글 좋아요 해제
 router.delete('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
-    let likecount = Like.like_count;
-    const variable = { post_id: req.params.postid, user_nick: user.user_nick, like_count: likecount-- };
+    const likeData = await Like.find({post_id: req.params.postid}).exec();
+    console.log("likecount : ", typeof(likecount));
+    const variable = { post_id: req.params.postid, user_nick: user.user_nick, like_count: --likeData.like_count };
 
     await Like.findOneAndDelete(variable).exec((err, result) => {
         if (err) return res.status(400).json({ response: false, err });
