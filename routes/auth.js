@@ -39,13 +39,13 @@ router.post('/register/check', async (req, res) => {
     });
     if (existUsers.length) {
         res.send({
-            alert: "이미 가입된 이메일 또는 닉네임이 있습니다."
+            alert: "사용 불가능합니다."
         });
         return;
     }
     
     res.send({
-        alert: '이메일과 닉네임이 사용가능합니다.'
+        alert: '사용 가능합니다.'
     });
 });
 
