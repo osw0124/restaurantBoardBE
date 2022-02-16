@@ -9,7 +9,7 @@ router.use(express.urlencoded({ extended: true }));
 // 게시글 좋아요
 router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
-    let likecount = Like.like_count;
+    let likecount = 0;
     console.log("likecount : ", typeof(likecount));
     const variable = { post_id: req.params.postid, user_nick: user.user_nick, like_count: likecount++ };
     console.log("data : ", variable);
