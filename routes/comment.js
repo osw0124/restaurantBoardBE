@@ -25,7 +25,7 @@ router.get('/comment/get/:id', async (req, res) => {
     const comment_list = await Comment.find({articleId: id}).populate('articleId').exec();
     console.log(comment_list);
 
-    if (comment_list.length) {
+    if (!comment_list.length) {
         res.send({
             alert: "댓글이 없습니다."
         });
