@@ -11,7 +11,6 @@ router.use(express.urlencoded({ extended: true }));
 router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
     const LikedData = await Like.find({ post_id: req.params.postid }).populate('post_id', '_id').exec();
-    console.log({ response: LikedData});
     // const boardData = await Board.findById(req.params.postid).exec();
 
     // console.log("likecount : ", boardData.like_count);
@@ -21,7 +20,7 @@ router.post('/like/:postid', authMiddleware, async(req, res) => {
     console.log("data : ", variable);
 
     await Like.create(variable);
-    res.status(200).json({ response: LikedData.user_nick });
+    res.status(200).json({ response: LikedData });
 });
 
 // 게시글 좋아요 해제
