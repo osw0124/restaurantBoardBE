@@ -8,7 +8,7 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 // 좋아요 데이터 보내주기
-router.get('/getlike', async(req, res) => {
+router.get('/getlike/:postid', async(req, res) => {
     const LikedData = await Like.find({ post_id: req.params.postid }).populate('post_id', '_id').exec();
     
     res.status(200).json({ response: LikedData });
