@@ -11,12 +11,9 @@ router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
     let likecount = Like.like_count;
     const variable = { post_id: req.params.postid, user_nick: user.user_nick, like_count: likecount++ };
-
-    const like = new Like(variable);
-    await like.save((err, likeResult) => {
-        if (err) return res.json({ response: false, err });
-        res.status(200).json({ variable });
-    })
+    
+    await Like.create(variable);
+    res.status(200).json({ variable });
 });
 
 // 게시글 좋아요 해제
