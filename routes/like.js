@@ -12,6 +12,7 @@ router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
     const boardData = await Board.findById(req.params.postid).exec();
     console.log("likecount : ", boardData.like_count);
+    console.log("클라이언트 like_count : ", res.locals.like_count);
     const variable = { post_id: req.params.postid, user_nick: user.user_nick };
     console.log("data : ", variable);
 
