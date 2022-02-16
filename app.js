@@ -4,7 +4,6 @@ const cors = require("cors");
 const path = require('path');
 const app = express();
 
-
 const port = 4000;
 const auth_router = require("./routes/auth");
 const boardRouter = require('./routes/board');
