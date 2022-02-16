@@ -19,10 +19,10 @@ router.post('/comment/save/:id', auth_middleware, async (req, res) => {
 });
 
 //댓글 조회
-router.get('/comment/get/:id', async (req, res) => {    
+router.get('/comment/get/:id', async (req, res) => {
     const { id } = req.params;
 
-    const comment_list = await Comment.find({articleId: id}).populate('articleId').exec();
+    const comment_list = await Comment.find({articleId: id}).populate('articleId', '_id').exec();
     console.log(comment_list);
 
     if (!comment_list.length) {
