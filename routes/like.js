@@ -22,9 +22,9 @@ router.post('/like/:postid', authMiddleware, async(req, res) => {
 // 게시글 좋아요 해제
 router.delete('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
-    const likeData = await Like.find({post_id: req.params.postid}).exec();
-    console.log("likecount : ", typeof(likecount));
-    const variable = { post_id: req.params.postid, user_nick: user.user_nick, like_count: --likeData.like_count };
+    const boardData = await Board.findById(req.params.postid).exec();
+    console.log("likecount : ", boardData.like_count);
+    const variable = { post_id: req.params.postid, user_nick: user.user_nick };
 
     await Like.findOneAndDelete(variable).exec((err, result) => {
         if (err) return res.status(400).json({ response: false, err });
