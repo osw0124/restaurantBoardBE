@@ -17,12 +17,12 @@ router.get('/getlike/:postid', async(req, res) => {
 // 게시글 좋아요
 router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
-    console.log("클라이언트 like_count : ", req.body.like_count);
 
     const variable = { post_id: req.params.postid, user_nick: user.user_nick };
     console.log("data : ", variable);
 
     await Like.create(variable);
+    res.status(200).json({ response: '좋아요 눌렀어요!' });
 });
 
 // 게시글 좋아요 해제
