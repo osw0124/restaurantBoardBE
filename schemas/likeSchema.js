@@ -8,10 +8,6 @@ const likeSchema = new mongoose.Schema({
     post_id: {
         type: mongoose.Schema.Types.ObjectId,        
         ref: "Board",
-    },
-    like_count: {
-        type: Number,
-        default: 0,
     }
 });
 

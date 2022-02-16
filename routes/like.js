@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Like = require('../schemas/likeSchema');
+const Board = require('../schemas/boardSchema');
 const authMiddleware = require('../middlewares/auth-middleware');
 
 router.use(express.json());
@@ -9,9 +10,9 @@ router.use(express.urlencoded({ extended: true }));
 // 게시글 좋아요
 router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
-    const likeData = await Like.find({post_id: req.params.postid}).exec();
-    console.log("likecount : ", likeData.like_count);
-    const variable = { post_id: req.params.postid, user_nick: user.user_nick, like_count: parseInt(likeData.like_count) };
+    const boardData = await Board.findById(req.params.postid).exec();
+    console.log("likecount : ", boardData.like_count);
+    const variable = { post_id: req.params.postid, user_nick: user.user_nick };
     console.log("data : ", variable);
 
     await Like.create(variable);

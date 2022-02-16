@@ -24,6 +24,10 @@ const boardSchema = mongoose.Schema({
     },
     user_nick: {
         type: String
+    },
+    like_count: {
+        type: Number,
+        default: 0
     }
 });
 
