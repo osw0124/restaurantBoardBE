@@ -10,8 +10,8 @@ router.use(express.urlencoded({ extended: true }));
 router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
     const likeData = await Like.find({post_id: req.params.postid}).exec();
-    console.log("likecount : ", typeof(likecount));
-    const variable = { post_id: req.params.postid, user_nick: user.user_nick, like_count: ++likeData.like_count };
+    console.log("likecount : ", likeData.like_count);
+    const variable = { post_id: req.params.postid, user_nick: user.user_nick, like_count: parseInt(likeData.like_count) };
     console.log("data : ", variable);
 
     await Like.create(variable);
