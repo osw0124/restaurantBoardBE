@@ -11,7 +11,8 @@ router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
     let likecount = Like.like_count;
     const variable = { post_id: req.params.postid, user_nick: user.user_nick, like_count: likecount++ };
-    
+    console.log(variable);
+
     await Like.create(variable);
     res.status(200).json({ variable });
 });
