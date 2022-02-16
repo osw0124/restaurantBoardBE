@@ -8,7 +8,7 @@ router.post('/comment/save/:id', auth_middleware, async (req, res) => {
     const { user } = res.locals;
     console.log(user);
     const {user_comment, createDate} = req.body;
-
+    
     
 
     await Comment.create({user_nick: user.user_nick, user_comment , createDate, articleId: req.params.id});
@@ -18,19 +18,22 @@ router.post('/comment/save/:id', auth_middleware, async (req, res) => {
     });
 });
 
-router.get('/comment/:commentid', async (req, res) => {
+//댓글 조회
+router.get('/comment/get/:id', async (req, res) => {    
     const { commentid } = req.params;
-    
+
+    const comment_list = Comment.find(commentid).populate(articleId).exec();
+    console.log(comment_list);
+
+    if (comment_list.length) {
+        res.send({
+            alert: "댓글이 없습니다."
+        });
+        return;
+    }    
+    res.json({
+        comment_list: comment_list
+    });
 });
-
-
-
-// 상세 페이지 조회
-router.get('/getpost/:postid', async(req, res) => {
-    const { postid } = req.params;
-    const wroteData = await Boards.findById(postid);
-    res.json({ response: wroteData });
-});
-
 
 module.exports = router;
