@@ -23,6 +23,7 @@ router.get('/comment/get/:id', async (req, res) => {
     const { commentid } = req.params;
 
     const comment_list = Comment.find(commentid).populate(articleId).exec();
+    console.log(comment_list);
 
     if (comment_list.length) {
         res.send({
