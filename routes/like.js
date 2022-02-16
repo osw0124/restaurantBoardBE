@@ -10,7 +10,7 @@ router.use(express.urlencoded({ extended: true }));
 // 게시글 좋아요
 router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
-    const LikedData = await Like.find({ post_id: req.params.postid }).populate('postid', '_id').exec();
+    const LikedData = await Like.find({ post_id: req.params.postid }).populate('post_id', '_id').exec();
     // const boardData = await Board.findById(req.params.postid).exec();
 
     // console.log("likecount : ", boardData.like_count);
