@@ -14,7 +14,12 @@
 
 ## 2.사용기술 📌
 * React
-* node.js
+* node.js(NPM)
+* express
+* mongoose(mongoDB)
+* JWT(Jason Web Token)
+* crypto-js
+* CORS
 
 ## 3.실행화면 😄
 
