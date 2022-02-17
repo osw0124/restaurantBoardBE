@@ -17,7 +17,7 @@
 * node.js(NPM)
 * express
 * mongoose(mongoDB)
-* JWT(Jason Web Token)
+* JWT(JSON Web Token)
 * crypto-js
 * CORS
 
