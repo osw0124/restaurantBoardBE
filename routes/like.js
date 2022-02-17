@@ -18,7 +18,7 @@ router.get('/getlike/:postid', async(req, res) => {
 router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
     const { like_count } = req.body;
-    console.log(like_count);
+    console.log("like_count:", like_count);
     const variable = { post_id: req.params.postid, user_nick: user.user_nick };
     
     await Like.create(variable);
@@ -29,13 +29,14 @@ router.post('/like/:postid', authMiddleware, async(req, res) => {
 // 게시글 좋아요 해제
 router.delete('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
-    console.log(like_count);
+    const { like_count } = req.body;
+    console.log("like_count:", like_count);
     
     const variable = { post_id: req.params.postid, user_nick: user.user_nick };
-    await Board.findByIdAndUpdate(req.params.postid, { like_count: like_count })
 
     Like.findOneAndDelete(variable).exec((err, result) => {
         if (err) return res.status(400).json({ response: false, err });
+        await Board.findByIdAndUpdate(req.params.postid, { like_count: like_count });
         res.status(200).json({ response: '좋아요 취소!' });
     });
 });
