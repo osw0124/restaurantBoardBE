@@ -27,7 +27,7 @@ router.post('/like/:postid', authMiddleware, async(req, res) => {
 });
 
 // 게시글 좋아요 해제
-router.delete('/like/:postid', authMiddleware, async(req, res) => {
+router.delete('/unlike/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
     console.log("req.body:", req.body);
     const { like_count } = req.body;
