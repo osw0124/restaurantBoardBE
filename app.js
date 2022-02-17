@@ -25,7 +25,6 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/node_modules', express.static(path.join('/node_modules')));
 
-
 app.listen(port, () => {
     console.log(`http://localhost:${port}에 접속되었습니다.`)
 });

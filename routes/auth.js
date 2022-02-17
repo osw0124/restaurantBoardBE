@@ -19,7 +19,7 @@ router.post('/register/save', async (req, res) => {
     }
 
     user_pwd = SHA256(user_pwd).toString();
-    console.log(user_pwd);
+    // console.log(user_pwd);
 
     const user = new users({user_id, user_nick, user_pwd});
     await user.save();
@@ -32,7 +32,7 @@ router.post('/register/save', async (req, res) => {
 // 아이디, 닉네임 중복확인
 router.post('/register/check', async (req, res) => {
     const {user_id, user_nick} = req.body;
-    console.log(user_id, user_nick);
+    // console.log(user_id, user_nick);
 
     const existUsers = await users.find({
         $or: [{user_id}, {user_nick}],

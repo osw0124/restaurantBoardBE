@@ -18,7 +18,7 @@ router.get('/getlike/:postid', async(req, res) => {
 router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
     const { like_count } = req.body;
-    console.log("like_count:", like_count);
+    // console.log("like_count:", like_count);
     const variable = { post_id: req.params.postid, user_nick: user.user_nick };
     
     await Like.create(variable);
@@ -29,9 +29,9 @@ router.post('/like/:postid', authMiddleware, async(req, res) => {
 // 게시글 좋아요 해제
 router.post('/unlike/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
-    console.log("req.body:", req.body);
+    // console.log("req.body:", req.body);
     const { like_count } = req.body;
-    console.log("like_count:", like_count);
+    // console.log("like_count:", like_count);
     
     const variable = { post_id: req.params.postid, user_nick: user.user_nick };
     await Board.findByIdAndUpdate(req.params.postid, { like_count: like_count });

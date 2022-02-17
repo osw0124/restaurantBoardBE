@@ -3,6 +3,7 @@ const router = express.Router();
 const Boards = require('../schemas/boardSchema');
 const authMiddleware = require('../middlewares/auth-middleware');
 
+// 이미지 url 형식때문에 제한 용량을 늘려줌
 router.use(express.json({limit: '10mb'}));
 router.use(express.urlencoded({limit:'10mb', extended: true}));
 
@@ -17,7 +18,6 @@ router.post('/addpost/save', authMiddleware, async(req, res) => {
     const { user } = res.locals;    
     const { image_url, title, location, comment, score, createdDate, like_count } = req.body;
     
-    // merge후에 user_nick, image_url을 채워넣어야 합니다.
     await Boards.create({ image_url, user_nick: user.user_nick, title, score, location, comment, createdDate, like_count });
     res.json({ success: '맛집 정보가 저장되었습니다!' })
 });
@@ -33,6 +33,7 @@ router.get('/getpost/:postid', async(req, res) => {
 router.patch('/getpost/modify/:postid', async(req, res) => {
     const { title, location, comment } = req.body;
     const { postid } = req.params;
+
     await Boards.findByIdAndUpdate({ _id: postid }, { title, location, comment })
     res.json({ success: '수정 성공!'})
 });
