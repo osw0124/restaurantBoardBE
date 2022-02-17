@@ -20,8 +20,10 @@ router.post('/like/:postid', authMiddleware, async(req, res) => {
 
     const variable = { post_id: req.params.postid, user_nick: user.user_nick };
     
-    await Like.create(variable);
-    res.status(200).json({ response: '좋아요 눌렀어요!' });
+    await Like.create(variable).exec((err, result) => {
+        if (err) return res.status(400).json({ response: false, err });
+        res.status(200).json({ response: '좋아요 눌렀어요!' });
+    });
 });
 
 // 게시글 좋아요 해제
