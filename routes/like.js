@@ -29,7 +29,6 @@ router.delete('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
     
     const variable = { post_id: req.params.postid, user_nick: user.user_nick };
-    console.log(variable);
 
     Like.findOneAndDelete(variable).exec((err, result) => {
         if (err) return res.status(400).json({ response: false, err });
