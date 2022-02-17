@@ -10,11 +10,16 @@
 
 * FE : 고주열, 이호빈, 장혜진
 * BE : 반장훈, 오세웅
-
+* FE github: https://github.com/hobinyoo/restaurant_board_FE
 
 ## 2.사용기술 📌
 * React
-* node.js
+* node.js(NPM)
+* express
+* mongoose(mongoDB)
+* JWT(JSON Web Token)
+* crypto-js
+* CORS
 
 ## 3.실행화면 😄
 
@@ -69,9 +74,9 @@
 
 : 제한 용량을 늘려서 저장이 가능하게 수정 했지만 여전히 길다
 
-**새로고침시 데이터 날라가는 현상**
+**토큰 정보를 이용한 사용자 정보 조회 안됨**
 
-: 서버에서 가져온 데이터를 렌더링 될때마다 불러주는 방식으로 진행 (원래는 리듀서에서의 값만 가져왔음)
+: 현재 로그인한 사용자의 정보를 조회하는 미들웨어를 사용하기 위해서 프론트에서 response header에 Authorization를 같이 전달
 
 
 
