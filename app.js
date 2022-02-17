@@ -17,7 +17,10 @@ const requestMiddlware = (req, res, next) => {
 
 connect();
 
-app.use(cors());
+app.use(cors({ 
+    origin: "http://restaurantboard.s3-website.ap-northeast-2.amazonaws.com",
+    credentials: true
+}));
 app.use(requestMiddlware);
 app.use('/api', [boardRouter, auth_router, comment_router, like_router]);
 app.use(express.json());
