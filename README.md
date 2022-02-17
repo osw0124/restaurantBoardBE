@@ -13,15 +13,19 @@
   - FE : 고주열, 이호빈, 장혜진 
   - BE : 반장훈, 오세웅
 
-📍BE 깃허브
-https://github.com/osw0124/restaurant_board_BE
+📍FE 깃허브
+https://github.com/hobinyoo/restaurant_board_FE
 
 <br/>
  
 2.사용기술  📌
 ------------------
-- React
-- node.js
+- node.js(NPM)
+- express
+- mongoose(mongoDB)
+- JWT(Jason Web Token)
+- crypto-js
+- CORS (Cross Origin Resource Sharing) 
 
 
 <br/>
