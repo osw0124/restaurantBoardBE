@@ -14,7 +14,7 @@ router.get('/getlike/:postid', async(req, res) => {
     res.status(200).json({ response: LikedData });
 })
 
-// 게시글 좋아요
+// 게시글 좋아요 저장
 router.post('/like/:postid', authMiddleware, async(req, res) => {
     const { user } = res.locals;
     const { like_count } = req.body;
