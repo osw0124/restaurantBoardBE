@@ -11,6 +11,7 @@
 * FE : 고주열, 이호빈, 장혜진
 * BE : 반장훈, 오세웅
 * FE github: https://github.com/hobinyoo/restaurant_board_FE
+* 프로젝트 설명: https://fancy-light-71e.notion.site/99-SA-b7f8be4b5ba54386b239bc2b13cf313b
 
 ## 2.사용기술 📌
 * React
